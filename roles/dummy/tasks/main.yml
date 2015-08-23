@@ -1,0 +1,49 @@
+---
+# file roles/dummy/tasks/main.yml
+- name: create folder of the module name
+  command: mkdir -p django-th-{{module_name}}/th_{{ module_name }}/templates/th_{{ module_name }}
+
+- name: create tests folder of the module name
+  command: mkdir django-th-{{module_name}}/th_{{ module_name }}/tests
+
+- name: travis.yml
+  template: src=django-th-dummy/.travis.yml dest=django-th-{{ module_name }}/.travis.yml
+
+- name: gitignore
+  template: src=django-th-dummy/.gitignore dest=django-th-{{ module_name }}/.gitignore
+
+- name: copy of th_dummy/__init__.py
+  template: src=django-th-dummy/th_dummy/__init__.py dest=django-th-{{ module_name }}/th_{{ module_name }}/__init__.py
+
+- name: copy of th_dummy/tests/__init__.py
+  template: src=django-th-dummy/th_dummy/tests/__init__.py dest=django-th-{{ module_name }}/th_{{ module_name }}/tests/__init__.py
+
+- name: copy of LICENSE
+  template: src=django-th-dummy/LICENSE dest=django-th-{{ module_name }}/LICENSE
+
+- name: copy of MANIFEST.in
+  template: src=django-th-dummy/MANIFEST.in dest=django-th-{{ module_name }}/MANIFEST.in
+
+- name: copy of setup.py
+  template: src=django-th-dummy/setup.py dest=django-th-{{ module_name }}/setup.py
+
+- name: copy of README.rst
+  template: src=django-th-dummy/README.rst dest=django-th-{{ module_name }}/README.rst
+
+- name: copy of requirements.txt 
+  template: src=django-th-dummy/requirements.txt dest=django-th-{{ module_name }}/requirements.txt
+
+- name: copy of my_dummy.py to my_{{ module_name }}.py
+  template: src=django-th-dummy/th_dummy/my_dummy.py dest=django-th-{{ module_name }}/th_{{ module_name }}/my_{{ module_name }}.py
+
+- name: copy of model.py
+  template: src=django-th-dummy/th_dummy/models.py dest=django-th-{{ module_name }}/th_{{ module_name }}/models.py
+
+- name: copy of forms.py
+  template: src=django-th-dummy/th_dummy/forms.py dest=django-th-{{ module_name }}/th_{{ module_name }}/forms.py
+
+- name: copy of test.py
+  template: src=django-th-dummy/th_dummy/tests/test.py dest=django-th-{{ module_name }}/th_{{ module_name }}/tests/test.py
+
+- name: copy of the templates
+  copy: src=roles/dummy/templates/django-th-dummy/th_dummy/templates/th_dummy/ dest=django-th-{{ module_name }}/th_{{ module_name }}/templates/th_{{ module_name }}/
