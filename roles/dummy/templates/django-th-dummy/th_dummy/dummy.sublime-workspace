@@ -1,0 +1,314 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"get",
+				"get_object_or_404	import"
+			],
+			[
+				"de",
+				"description	function"
+			],
+			[
+				"django",
+				"django_th	module"
+			],
+			[
+				"d",
+				"description"
+			],
+			[
+				"tri",
+				"trigger_id"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/foxmask/Django-VirtualEnv/dummy/roles/dummy/tasks/main.yml",
+			"settings":
+			{
+				"buffer_size": 203,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/foxmask/Django-VirtualEnv/dummy/site.yml",
+			"settings":
+			{
+				"buffer_size": 129,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 352.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/foxmask/Django-VirtualEnv/dummy",
+		"/home/foxmask/Django-VirtualEnv/dummy/roles",
+		"/home/foxmask/Django-VirtualEnv/dummy/roles/dummy",
+		"/home/foxmask/Django-VirtualEnv/dummy/roles/dummy/tasks"
+	],
+	"file_history":
+	[
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/README.rst",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/CONTRIBUTING.md",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_rss/templates/rss/my_feeds.html",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/urls.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_rss/urls.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_rss/my_rss.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/settings.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/local_settings.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_rss/gen_feeds.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/views_userservices.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_rss/models.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_evernote/my_evernote.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/views.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/templates/services/add_service.html",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_pocket/my_pocket.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/templates/base.html",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_pocket/models.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/models/__init__.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/admin.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/service_provider.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_rss/tests/test_rss.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/migrations/__0001_initial.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/migrations/0001_initial.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_rss/migrations/0002_rss_add_uuid.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_rss/migrations/0004_rss_uuid_remove_uuid_null.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_rss/migrations/0003_rss_populate_uuid_values.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_rss/migrations/0001_initial.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/migrations/0003_rss_uuid_populate_values.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/migrations/0004_rss_uuid_remove_uuid_null.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_rss/migrations/__init__.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/th_rss/mogrations/0001_initial.py",
+		"/home/foxmask/Django-VirtualEnv/django-trigger-happy/django-th/django_th/migrations/0002_rss_uuid.py",
+		"/home/foxmask/.config/sublime-text-3/Packages/Python Flake8 Lint/Flake8Lint.sublime-settings",
+		"/home/foxmask/.config/sublime-text-3/Packages/Pylinter/README.rst"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"TemplateView",
+			"UserServiceCreateView",
+			"add_service",
+			"auth",
+			"def auth",
+			"CONTEXT_PROCESSOR",
+			"AUTHENTICATION",
+			"data",
+			"return",
+			"RssFeeds",
+			"uuid"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/foxmask/Django-VirtualEnv/dummy/roles/dummy/tasks/main.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 203,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								154,
+								154
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/foxmask/Django-VirtualEnv/dummy/site.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 129,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								128,
+								128
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "dummy.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 249.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
