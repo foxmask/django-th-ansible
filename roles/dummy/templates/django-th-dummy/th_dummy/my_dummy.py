@@ -2,11 +2,11 @@
 # add here the call of any native lib of python like datetime etc.
 #
 
-# Using OAuth1Session
-from requests_oauthlib import OAuth1Session
+# Using OAuth{{ oauth_version }}Session
+from requests_oauthlib import OAuth{{ oauth_version }}Session
 
-# add the python API here if needed
-from external_api import CallOfApi
+# add the python API here if needed
+from {{ external_api }} import {{ external_api_class }}
 
 # django classes
 from django.conf import settings
@@ -19,16 +19,17 @@ from django_th.services.services import ServicesMgr
 from django_th.models import UserService, ServicesActivated
 
 """
-    handle process with {{ module_name }}
+    handle process with {{ module_name }}
     put the following in settings.py
 
-    TH_{{ module_name | upper }} = {
+    TH_{{ module_name | upper }} = {
         'consumer_key': 'abcdefghijklmnopqrstuvwxyz',
+        'consumer_secret': 'abcdefghijklmnopqrstuvwxyz',
     }
 
     TH_SERVICES = (
         ...
-        'th_{{ module_name }}.my_{{ module_name }}.Service{{ class_name }}',
+        'th_{{ module_name }}.my_{{ module_name }}.Service{{ class_name }}',
         ...
     )
 
@@ -36,15 +37,19 @@ from django_th.models import UserService, ServicesActivated
 
 logger = getLogger('django_th.trigger_happy')
 
-cache = caches['th_{{ module_name }}']
+cache = caches['th_{{ module_name }}']
 
 
-class Service{{ class_name }}(ServicesMgr):
+class Service{{ class_name }}(ServicesMgr):
 
     def __init__(self, token=None):
-        self.consumer_key = settings.TH_{{ module_name | upper }}['consumer_key']
+        self.AUTH_URL = '{{ AUTH_URL }}'
+        self.ACC_TOKEN = '{{ ACC_TOKEN }}'
+        self.REQ_TOKEN = '{{ REQ_TOKEN }}'
+        self.consumer_key = settings.TH_{{ module_name | upper }}['consumer_key']
+        self.consumer_secret = settings.TH_{{ module_name | upper }}['consumer_secret']
         if token:
-            self.dummy_instance = CallOfApi(self.consumer_key, token)
+            self.{{ module_name }} = {{ external_api_class }}(self.consumer_key, token)
 
     def read_data(self, token, trigger_id, date_triggered):
         """
@@ -61,7 +66,7 @@ class Service{{ class_name }}(ServicesMgr):
             :rtype: list
         """
         data = list()
-        cache.set('th_{{ module_name }}_' + str(trigger_id), data)
+        cache.set('th_{{ module_name }}_' + str(trigger_id), data)
 
     def process_data(self, trigger_id):
         """
@@ -83,14 +88,14 @@ class Service{{ class_name }}(ServicesMgr):
             :return: the status of the save statement
             :rtype: boolean
         """
-        from th_{{ module_name }}.models import {{ class_name }}
+        from th_{{ module_name }}.models import {{ class_name }}
         status = False
 
         if token and 'link' in data and data['link'] is not None and len(data['link']) > 0:
             # get the data of this trigger
-            trigger = {{ class_name }}.objects.get(trigger_id=trigger_id)
+            trigger = {{ class_name }}.objects.get(trigger_id=trigger_id)
             # if the external service need we provide
-            # our stored token and token secret then I do
+            # our stored token and token secret then I do
             # token_key, token_secret = token.split('#TH#')
 
                 # get the token of the external service for example
@@ -98,10 +103,9 @@ class Service{{ class_name }}(ServicesMgr):
             title = ''
             title = (data['title'] if 'title' in data else '')
                 # add data to the external service
-            item_id = self.{{ module_name }}_instance .add(
-                url=data['link'], title=title, tags=(trigger.tag.lower()))
+            item_id = self.{{ module_name }}.add(url=data['link'], title=title, tags=(trigger.tag.lower()))
 
-            sentance = str('{{ module_name }} {} created').format(data['link'])
+            sentance = str('{{ module_name }} {} created').format(data['link'])
             logger.debug(sentance)
             status = True
         else:
@@ -145,7 +149,7 @@ class Service{{ class_name }}(ServicesMgr):
             # 1) we get the previous objet
             us = UserService.objects.get(
                 user=request.user,
-                name=ServicesActivated.objects.get(name='Service{{ service_name }}'))
+                name=ServicesActivated.objects.get(name='Service{{ class_name }}'))
             # 2) Readability API require to use 4 parms consumer_key/secret +
             # token_key/secret instead of usually get just the token
             # from an access_token request. So we need to add a string
@@ -163,17 +167,17 @@ class Service{{ class_name }}(ServicesMgr):
         except KeyError:
             return '/'
 
-        return '{{ module_name }}/callback.html'
+        return '{{ module_name }}/callback.html'
 
     def get_request_token(self):
-        oauth = OAuth1Session(self.consumer_key,
+        oauth = OAuth{{ oauth_version }}Session(self.consumer_key,
                               client_secret=self.consumer_secret)
         return oauth.fetch_request_token(self.REQ_TOKEN)
 
     def get_access_token(self, oauth_token, oauth_token_secret,
                          oauth_verifier):
         # Using OAuth1Session
-        oauth = OAuth1Session(self.consumer_key,
+        oauth = OAuth{{ oauth_version }}Session(self.consumer_key,
                               client_secret=self.consumer_secret,
                               resource_owner_key=oauth_token,
                               resource_owner_secret=oauth_token_secret,

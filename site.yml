@@ -1,8 +1,8 @@
 ---
-# file: site.yml
-# this playbook bootstrap a dummy module 
-# with the above informations
-# then your are ready to finish the module ;-)
+# file: site.yml
+# this playbook bootstrap a dummy module
+# with the above informations
+# then your are ready to finish the module ;-)
 - hosts: home-sweet-home
 
   roles:
@@ -10,19 +10,26 @@
 
   vars:
     # to directory tree and class/module/name purpose
-    module_name: johndoe
-    service_name: johndoe
-    class_name: Johndoe
+    module_name: mymodule
+    service_name: myservice
+    class_name: MyClass
 
-    # for setup.py purpose
-    author: John Doe
-    author_email: john@doe.com
-    description: this is a module that is fun
-    details: when fun is higher than anything
-    url: https://github.com/foxmask/django-th-johndoe
-    download_url: https://github.com/foxmask/django-th-johndoe/archive/trigger-happy-johndoe-
+    # for setup.py purpose
+    author: Olivier Demah
+    author_email: olivier@foxmask.info
+    description: A service for Trigger Happy
+    details: There we go again
+    url: https://github.com/foxmask/django-th-mymodule
+    download_url: https://github.com/foxmask/django-th-github/archive/trigger-happy-mymodule-
 
     # for dependencies purpose
-    external_api: foobar
-    external_api_class: Foobar
-    external_api_version: 1.2.3
+    external_api: an_api
+    external_api_class: OneClass
+    external_api_version: 0.0.1
+
+    # for oauth if any
+    oauth_version: 1
+    # URL to access to the OAuth of the service
+    AUTH_URL: ''
+    ACC_TOKEN: ''
+    REQ_TOKEN: ''

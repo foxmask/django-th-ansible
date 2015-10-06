@@ -33,8 +33,8 @@ class {{ class_name }}Test(TestCase):
             name='ServiceRSS', status=True,
             auth_required=False, description='Service RSS')
         service_consumer = ServicesActivated.objects.create(
-            name='Service{{ module_name }}', status=True,
-            auth_required=True, description='Service {{ module_name }}')
+            name='Service{{ class_name }}', status=True,
+            auth_required=True, description='Service {{ class_name }}')
         provider = UserService.objects.create(user=user,
                                               token="",
                                               name=service_provider)
@@ -50,19 +50,19 @@ class {{ class_name }}Test(TestCase):
 
     def create_{{ module_name }}(self):
         """
-            Create a {{ module_name }} object related to the trigger object
+            Create a {{ class_name }} object related to the trigger object
         """
         trigger = self.create_triggerservice()
         name = '{{ module_name }}'
         status = True
-        return {{ module_name }}.objects.create(trigger=trigger, name=name, status=status)
+        return {{ class_name }}.objects.create(trigger=trigger, name=name, status=status)
 
     def test_{{ module_name }}(self):
         """
            Test if the creation of the {{ module_name }} object looks fine
         """
         d = self.create_{{ module_name }}()
-        self.assertTrue(isinstance(d, {{ module_name }}))
+        self.assertTrue(isinstance(d, {{ class_name }}))
         self.assertEqual(d.show(), "My {{ class_name }} %s" % (d.name))
 
     """
@@ -106,4 +106,4 @@ class {{ class_name }}Test(TestCase):
         """
             does this settings exists ?
         """
-        self.assertTrue(settings.TH_{{ module_name | upper }})
+        self.assertTrue(settings.TH_{{ module_name | upper }})

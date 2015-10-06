@@ -20,13 +20,13 @@ Requirements
 site.yml
 ========
 
-the content of the actual looks like this 
+the content of the actual looks like this
 
 .. code:: xml
 
     ---
     # file: site.yml
-    # this playbook bootstrap a dummy module 
+    # this playbook bootstrap a dummy module
     # with the above informations
     # then your are ready to finish the module ;-)
     - hosts: home-sweet-home
@@ -53,6 +53,15 @@ the content of the actual looks like this
         external_api_class: Foobar
         external_api_version: 1.2.3
 
+        # for oauth if any
+
+        oauth_version: 1
+
+        # URL to access to the OAuth of the service
+        AUTH_URL: 'http://foobar.com/oauth/auth'
+        ACC_TOKEN: 'http://foobar.com/oauth/access'
+        REQ_TOKEN: 'http://foobar.com/oauth/req'
+
 
 change the value that fit your needs
 
@@ -67,65 +76,65 @@ once the file site.yml is ready take a site and launch :
     ansible-playbook -i hosts site.yml
 
 
-and see 
+and see
 
 .. code:: bash
 
-    PLAY [home-sweet-home] ******************************************************** 
+    PLAY [home-sweet-home] ********************************************************
 
-    GATHERING FACTS *************************************************************** 
+    GATHERING FACTS ***************************************************************
     ok: [localhost]
 
-    TASK: [dummy | create folder of the module name] ****************************** 
+    TASK: [dummy | create folder of the module name] ******************************
     changed: [localhost]
 
-    TASK: [dummy | create tests folder of the module name] ************************ 
+    TASK: [dummy | create tests folder of the module name] ************************
     changed: [localhost]
 
-    TASK: [dummy | travis.yml] **************************************************** 
+    TASK: [dummy | travis.yml] ****************************************************
     changed: [localhost]
 
-    TASK: [dummy | gitignore] ***************************************************** 
+    TASK: [dummy | gitignore] *****************************************************
     changed: [localhost]
 
-    TASK: [dummy | copy of th_dummy/__init__.py] ********************************** 
+    TASK: [dummy | copy of th_dummy/__init__.py] **********************************
     changed: [localhost]
 
-    TASK: [dummy | copy of th_dummy/tests/__init__.py] **************************** 
+    TASK: [dummy | copy of th_dummy/tests/__init__.py] ****************************
     changed: [localhost]
 
-    TASK: [dummy | copy of LICENSE] *********************************************** 
+    TASK: [dummy | copy of LICENSE] ***********************************************
     changed: [localhost]
 
-    TASK: [dummy | copy of MANIFEST.in] ******************************************* 
+    TASK: [dummy | copy of MANIFEST.in] *******************************************
     changed: [localhost]
 
-    TASK: [dummy | copy of setup.py] ********************************************** 
+    TASK: [dummy | copy of setup.py] **********************************************
     changed: [localhost]
 
-    TASK: [dummy | copy of README.rst] ******************************************** 
+    TASK: [dummy | copy of README.rst] ********************************************
     changed: [localhost]
 
-    TASK: [dummy | copy of requirements.txt] ************************************** 
+    TASK: [dummy | copy of requirements.txt] **************************************
     changed: [localhost]
 
-    TASK: [dummy | copy of my_dummy.py to my_{{ module_name }}.py] *************** 
+    TASK: [dummy | copy of my_dummy.py to my_{{ module_name }}.py] ***************
     changed: [localhost]
 
-    TASK: [dummy | copy of model.py] ********************************************** 
+    TASK: [dummy | copy of model.py] **********************************************
     changed: [localhost]
 
-    TASK: [dummy | copy of forms.py] ********************************************** 
+    TASK: [dummy | copy of forms.py] **********************************************
     changed: [localhost]
 
-    TASK: [dummy | copy of test.py] *********************************************** 
+    TASK: [dummy | copy of test.py] ***********************************************
     changed: [localhost]
 
-    TASK: [dummy | copy of the templates] ***************************************** 
+    TASK: [dummy | copy of the templates] *****************************************
     changed: [localhost]
 
-    PLAY RECAP ******************************************************************** 
-    localhost                  : ok=17   changed=16   unreachable=0    failed=0   
+    PLAY RECAP ********************************************************************
+    localhost                  : ok=17   changed=16   unreachable=0    failed=0
 
     (triggerhappy-bootstrap)foxmask@zorro:~/Django-VirtualEnv/django-th-ansible$ ls -ltR django-th-johndoe/
     django-th-johndoe/:
