@@ -1,1 +1,1 @@
-{{ external_api }}=={{ external_api_version }}
+{{ external_api }}=={{ external_api_version }}

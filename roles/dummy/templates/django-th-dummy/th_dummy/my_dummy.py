@@ -1,9 +1,5 @@
 # coding: utf-8
 # add here the call of any native lib of python like datetime etc.
-#
-
-# Using OAuth{{ oauth_version }}Session
-from requests_oauthlib import OAuth{{ oauth_version }}Session
 
 # add the python API here if needed
 from {{ external_api }} import {{ external_api_class }}
@@ -74,8 +70,7 @@ class Service{{ class_name }}(ServicesMgr):
             :param trigger_id: trigger ID from which to save data
             :type trigger_id: int
         """
-        datas = list()
-        return datas
+        return super(Service{{ class_name }}, self).process_data('th_{{ module_name }}', str(trigger_id))
 
     def save_data(self, token, trigger_id, **data):
         """
@@ -89,7 +84,13 @@ class Service{{ class_name }}(ServicesMgr):
             :rtype: boolean
         """
         from th_{{ module_name }}.models import {{ class_name }}
+
+        title = ''
+        content = ''
         status = False
+        kwargs = {}
+
+        title, content = super(Service{{ class_name }}, self).save_data(data, **kwargs)
 
         if token and 'link' in data and data['link'] is not None and len(data['link']) > 0:
             # get the data of this trigger
@@ -97,12 +98,6 @@ class Service{{ class_name }}(ServicesMgr):
             # if the external service need we provide
             # our stored token and token secret then I do
             # token_key, token_secret = token.split('#TH#')
-
-                # get the token of the external service for example
-
-            title = ''
-            title = (data['title'] if 'title' in data else '')
-                # add data to the external service
             item_id = self.{{ module_name }}.add(url=data['link'], title=title, tags=(trigger.tag.lower()))
 
             sentance = str('{{ module_name }} {} created').format(data['link'])
@@ -118,15 +113,8 @@ class Service{{ class_name }}(ServicesMgr):
         """
             let's auth the user to the Service
         """
-        callback_url = 'http://%s%s' % (
-            request.get_host(), reverse('{{ module_name }}_callback'))
-
-        request_token = self.get_request_token()
-
-        # Save the request token information for later
-        request.session['oauth_token'] = request_token['oauth_token']
-        request.session['oauth_token_secret'] = request_token[
-            'oauth_token_secret']
+        request_token = super(Service{{ class_name }}, self).auth(request)
+        callback_url = self.callback_url(request, 'readability')
 
         # URL to redirect user to, to authorize your app
         auth_url_str = '%s?oauth_token=%s&oauth_callback=%s'
@@ -140,48 +128,6 @@ class Service{{ class_name }}(ServicesMgr):
         """
             Called from the Service when the user accept to activate it
         """
-
-        try:
-            # finally we save the user auth token
-            # As we already stored the object ServicesActivated
-            # from the UserServiceCreateView now we update the same
-            # object to the database so :
-            # 1) we get the previous objet
-            us = UserService.objects.get(
-                user=request.user,
-                name=ServicesActivated.objects.get(name='Service{{ class_name }}'))
-            # 2) Readability API require to use 4 parms consumer_key/secret +
-            # token_key/secret instead of usually get just the token
-            # from an access_token request. So we need to add a string
-            # seperator for later use to slpit on this one
-            access_token = self.get_access_token(
-                request.session['oauth_token'],
-                request.session['oauth_token_secret'],
-                request.GET.get('oauth_verifier', '')
-            )
-            # us.token = access_token.get('oauth_token') + \
-            #    '#TH#' + access_token.get('oauth_token_secret')
-            us.token = access_token
-            # 3) and save everything
-            us.save()
-        except KeyError:
-            return '/'
-
-        return '{{ module_name }}/callback.html'
-
-    def get_request_token(self):
-        oauth = OAuth{{ oauth_version }}Session(self.consumer_key,
-                              client_secret=self.consumer_secret)
-        return oauth.fetch_request_token(self.REQ_TOKEN)
-
-    def get_access_token(self, oauth_token, oauth_token_secret,
-                         oauth_verifier):
-        # Using OAuth1Session
-        oauth = OAuth{{ oauth_version }}Session(self.consumer_key,
-                              client_secret=self.consumer_secret,
-                              resource_owner_key=oauth_token,
-                              resource_owner_secret=oauth_token_secret,
-                              verifier=oauth_verifier)
-        oauth_tokens = oauth.fetch_access_token(self.ACC_TOKEN)
-
-        return oauth_tokens
+        kwargs = {'access_token': '', 'service': 'Service{{ class_name }}',
+                  'return': '{{ module_name }}'}
+        return super(Service{{ class_name }}, self).callback(request, **kwargs)
