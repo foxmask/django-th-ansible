@@ -8,7 +8,7 @@ from th_{{ module_name }}.models import {{ class_name }}
 class {{ class_name }}Form(forms.ModelForm):
 
     """
-        for to handle Pocket service
+        for to handle {{ class_name }} service
     """
 
     class Meta:
