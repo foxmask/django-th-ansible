@@ -62,7 +62,7 @@ TH_SERVICES is a list of the services used by Trigger Happy
         'th_{{ module_name }}.my_{{ module_name }}.Service{{ module_name | capitalize }}',
     )
 
-
+{% if oauth_version %}
 TH_{{module_name }}
 ~~~~~~~~
 
@@ -74,6 +74,7 @@ TH_{{ module_name }} is the settings you will need to be able to add/read data i
         'consumer_key': 'abcdefghijklmnopqrstuvwxyz',
     }
 
+{% endif %}
 Setting up : Administration
 ===========================
 

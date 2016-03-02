@@ -65,6 +65,51 @@ the content of the actual looks like this
 
 change the value that fit your needs
 
+in case you want to create a module that does not use external_api nor oauth then you could do:
+
+.. code:: xml
+
+    ---
+    # file: site.yml
+    # this playbook bootstrap a dummy module
+    # with the above informations
+    # then your are ready to finish the module ;-)
+    - hosts: home-sweet-home
+
+      roles:
+      - dummy
+
+      vars:
+        # to directory tree and class/module/name purpose
+        module_name: johndoe
+        service_name: johndoe
+        class_name: Johndoe
+
+        # for setup.py purpose
+        author: John Doe
+        author_email: john@doe.com
+        description: this is a module that is fun
+        details: when fun is higher than anything
+        url: https://github.com/foxmask/django-th-johndoe
+        download_url: https://github.com/foxmask/django-th-johndoe/archive/trigger-happy-johndoe-
+
+        # for dependencies purpose in the requirements.txt file
+        external_api: 
+        external_api_class:
+        external_api_version:
+
+        # for oauth if any
+
+        oauth_version:
+
+        # URL to access to the OAuth of the service
+        AUTH_URL:
+        ACC_TOKEN:
+        REQ_TOKEN:
+
+
+external_api and oauth_version are cleaned up
+
 
 running
 =======
@@ -176,4 +221,4 @@ and see
 last step
 =========
 
-change "Dummy" in all the templates
+change the string "Dummy" in all the templates

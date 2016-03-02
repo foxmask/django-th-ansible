@@ -19,7 +19,7 @@ class {{ class_name }}(Services):
         db_table = 'django_th_{{ module_name }}'
 
     def __str__(self):
-        return "%s" % (self.name)
+        return self.name
 
     def show(self):
         return "My {{ class_name }} %s" % (self.name)

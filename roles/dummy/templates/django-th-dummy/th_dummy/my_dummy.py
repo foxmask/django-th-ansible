@@ -1,20 +1,24 @@
 # coding: utf-8
 # add here the call of any native lib of python like datetime etc.
 
+{% if external_api %}
 # add the python API here if needed
 from {{ external_api }} import {{ external_api_class }}
-
+{% endif %}
 # django classes
+{% if oauth_version %}
 from django.conf import settings
 from django.core.urlresolvers import reverse
+{% endif %}
 from django.utils.log import getLogger
 from django.core.cache import caches
 
 # django_th classes
 from django_th.services.services import ServicesMgr
-from django_th.models import UserService, ServicesActivated
+
 
 """
+{% if oauth_version %}
     handle process with {{ module_name }}
     put the following in settings.py
 
@@ -22,13 +26,12 @@ from django_th.models import UserService, ServicesActivated
         'consumer_key': 'abcdefghijklmnopqrstuvwxyz',
         'consumer_secret': 'abcdefghijklmnopqrstuvwxyz',
     }
-
+{% endif %}
     TH_SERVICES = (
         ...
         'th_{{ module_name }}.my_{{ module_name }}.Service{{ class_name }}',
         ...
     )
-
 """
 
 logger = getLogger('django_th.trigger_happy')
@@ -37,8 +40,9 @@ cache = caches['th_{{ module_name }}']
 
 
 class Service{{ class_name }}(ServicesMgr):
-
+{% if oauth_version %}
     def __init__(self, token=None):
+
         self.AUTH_URL = '{{ AUTH_URL }}'
         self.ACC_TOKEN = '{{ ACC_TOKEN }}'
         self.REQ_TOKEN = '{{ REQ_TOKEN }}'
@@ -46,6 +50,7 @@ class Service{{ class_name }}(ServicesMgr):
         self.consumer_secret = settings.TH_{{ module_name | upper }}['consumer_secret']
         if token:
             self.{{ module_name }} = {{ external_api_class }}(self.consumer_key, token)
+{% endif %}
 
     def read_data(self, token, trigger_id, date_triggered):
         """
@@ -100,8 +105,8 @@ class Service{{ class_name }}(ServicesMgr):
             # token_key, token_secret = token.split('#TH#')
             item_id = self.{{ module_name }}.add(url=data['link'], title=title, tags=(trigger.tag.lower()))
 
-            sentance = str('{{ module_name }} {} created').format(data['link'])
-            logger.debug(sentance)
+            sentence = str('{{ module_name }} {} created').format(data['link'])
+            logger.debug(sentence)
             status = True
         else:
             logger.critical(
@@ -109,6 +114,7 @@ class Service{{ class_name }}(ServicesMgr):
             status = False
         return status
 
+{% if oauth_version %}
     def auth(self, request):
         """
             let's auth the user to the Service
@@ -131,3 +137,4 @@ class Service{{ class_name }}(ServicesMgr):
         kwargs = {'access_token': '', 'service': 'Service{{ class_name }}',
                   'return': '{{ module_name }}'}
         return super(Service{{ class_name }}, self).callback(request, **kwargs)
+{% endif %}

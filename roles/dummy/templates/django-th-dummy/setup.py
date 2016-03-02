@@ -1,5 +1,6 @@
 from setuptools import setup, find_packages
-from th_dummy import __version__ as version
+from th_{{ module_name }} import __version__ as version
+{% if external_api %}
 import os
 
 
@@ -12,6 +13,7 @@ def reqs(*f):
         os.path.join(os.getcwd(), *f)).readlines()]))
 
 install_requires = reqs('requirements.txt')
+{% endif %}
 
 setup(
     name='django_th_{{ module_name }}',
@@ -33,6 +35,8 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Framework :: Django',
     ],
+{% if external_api %}
     install_requires=install_requires,
+{% endif %}
     include_package_data=True,
 )

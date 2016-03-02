@@ -10,22 +10,22 @@
 
   vars:
     # to directory tree and class/module/name purpose
-    module_name: mymodule
-    service_name: myservice
-    class_name: MyClass
+    module_name: johndoe
+    service_name: johndoe
+    class_name: Johndoe
 
     # for setup.py purpose
-    author: Olivier Demah
-    author_email: olivier@foxmask.info
-    description: A service for Trigger Happy
-    details: There we go again
-    url: https://github.com/foxmask/django-th-mymodule
-    download_url: https://github.com/foxmask/django-th-github/archive/trigger-happy-mymodule-
+    author: John Doe
+    author_email: john@doe.com
+    description: this is a fun module
+    details: when happiness is met
+    url: https://github.com/foxmask/django-th-johndoe
+    download_url: https://github.com/foxmask/django-th-johndoe/archive/trigger-happy-johndoe-
 
     # for dependencies purpose
-    external_api: an_api
-    external_api_class: OneClass
-    external_api_version: 0.0.1
+    external_api: foobar
+    external_api_class: Foobar
+    external_api_version: 1.2.3
 
     # for oauth if any
     oauth_version: 1

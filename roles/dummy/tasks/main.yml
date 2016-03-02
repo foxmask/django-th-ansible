@@ -32,8 +32,9 @@
 
 - name: copy of requirements.txt
   template: src=django-th-dummy/requirements.txt dest=django-th-{{ module_name }}/requirements.txt
+  when: external_api
 
-- name: copy of my_dummy.py to my_"{{ module_name }}".py
+- name: copy of my_dummy.py to my_{{ module_name }}.py
   template: src=django-th-dummy/th_dummy/my_dummy.py dest=django-th-{{ module_name }}/th_{{ module_name }}/my_{{ module_name }}.py
 
 - name: copy of model.py
@@ -47,3 +48,6 @@
 
 - name: copy of the templates
   copy: src=roles/dummy/templates/django-th-dummy/th_dummy/templates/th_dummy/ dest=django-th-{{ module_name }}/th_{{ module_name }}/templates/th_{{ module_name }}/
+
+- name: remove unecessary callback.html template
+  file: path=django-th-{{ module_name }}/th_{{ module_name }}/templates/th_{{ module_name }}/callback.html state=absent

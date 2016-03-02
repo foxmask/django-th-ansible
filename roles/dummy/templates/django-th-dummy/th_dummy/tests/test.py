@@ -102,8 +102,11 @@ class {{ class_name }}Test(TestCase):
         form = {{ class_name }}ConsumerForm(data={})
         self.assertFalse(form.is_valid())
 
+{% if external_api %}
     def test_get_config_th(self):
         """
             does this settings exists ?
         """
         self.assertTrue(settings.TH_{{ module_name | upper }})
+
+{% endif %}
