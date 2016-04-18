@@ -22,4 +22,4 @@ class {{ class_name }}(Services):
         return self.name
 
     def show(self):
-        return "My {{ class_name }} %s" % (self.name)
+        return "My {{ class_name }} %s" % self.name

@@ -52,46 +52,45 @@ class Service{{ class_name }}(ServicesMgr):
             self.{{ module_name }} = {{ external_api_class }}(self.consumer_key, token)
 {% endif %}
 
-    def read_data(self, token, trigger_id, date_triggered):
+    def read_data(self, **kwargs):
         """
             get the data from the service
             as the pocket service does not have any date
             in its API linked to the note,
             add the triggered date to the dict data
             thus the service will be triggered when data will be found
-            :param trigger_id: trigger ID to process
-            :param date_triggered: the date of the last trigger
-            :type trigger_id: int
-            :type date_triggered: datetime
-            :return: list of data found from the date_triggered filter
+
+            :param kwargs: contain keyword args : trigger_id at least
+            :type kwargs: dict
+
             :rtype: list
         """
+        trigger_id = kwargs['trigger_id']
         data = list()
         cache.set('th_{{ module_name }}_' + str(trigger_id), data)
 
-    def process_data(self, trigger_id):
+    def process_data(self, **kwargs):
         """
             get the data from the cache
-            :param trigger_id: trigger ID from which to save data
-            :type trigger_id: int
+            :param kwargs: contain keyword args : trigger_id at least
+            :type kwargs: dict
         """
-        return super(Service{{ class_name }}, self).process_data('th_{{ module_name }}', str(trigger_id))
+        kw = {'cache_stack': 'th_github',
+              'trigger_id': str(kwargs['trigger_id'])}
+        return super(Service{{ class_name }}, self).process_data(**kw)
 
-    def save_data(self, token, trigger_id, **data):
+    def save_data(self, trigger_id, **data):
         """
             let's save the data
-
             :param trigger_id: trigger ID from which to save data
-            :param **data: the data to check to be used and save
+            :param data: the data to check to be used and save
             :type trigger_id: int
-            :type **data:  dict
+            :type data:  dict
             :return: the status of the save statement
             :rtype: boolean
         """
         from th_{{ module_name }}.models import {{ class_name }}
 
-        title = ''
-        content = ''
         status = False
         kwargs = {}
 
@@ -103,7 +102,7 @@ class Service{{ class_name }}(ServicesMgr):
             # if the external service need we provide
             # our stored token and token secret then I do
             # token_key, token_secret = token.split('#TH#')
-            item_id = self.{{ module_name }}.add(url=data['link'], title=title, tags=(trigger.tag.lower()))
+            self.{{ module_name }}.add(url=data['link'], title=title, tags=(trigger.tag.lower()))
 
             sentence = str('{{ module_name }} {} created').format(data['link'])
             logger.debug(sentence)

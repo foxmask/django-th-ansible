@@ -9,7 +9,7 @@
 Requirements :
 ==============
 
-* django_th == 0.11.0
+* django_th == 0.12.1
 
 
 Installation:
@@ -63,7 +63,7 @@ TH_SERVICES is a list of the services used by Trigger Happy
     )
 
 {% if oauth_version %}
-TH_{{module_name }}
+TH_{{module_name | upper }}
 ~~~~~~~~
 
 TH_{{ module_name }} is the settings you will need to be able to add/read data in/from {{ module_name }} Service.

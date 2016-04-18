@@ -4,7 +4,7 @@
   command: mkdir -p django-th-{{module_name}}/th_{{ module_name }}/templates/th_{{ module_name }}
 
 - name: create tests folder of the module name
-  command: mkdir django-th-{{module_name}}/th_{{ module_name }}/tests
+  command: mkdir django-th-{{module_name}}/th_{{ module_name }}/tests
 
 - name: travis.yml
   template: src=django-th-dummy/.travis.yml dest=django-th-{{ module_name }}/.travis.yml
@@ -15,8 +15,8 @@
 - name: copy of th_dummy/__init__.py
   template: src=django-th-dummy/th_dummy/__init__.py dest=django-th-{{ module_name }}/th_{{ module_name }}/__init__.py
 
-- name: copy of th_dummy/tests/__init__.py
-  template: src=django-th-dummy/th_dummy/tests/__init__.py dest=django-th-{{ module_name }}/th_{{ module_name }}/tests/__init__.py
+- name: copy of th_dummy/tests.py
+  template: src=django-th-dummy/th_dummy/tests.py dest=django-th-{{ module_name }}/th_{{ module_name }}/tests.py
 
 - name: copy of LICENSE
   template: src=django-th-dummy/LICENSE dest=django-th-{{ module_name }}/LICENSE
@@ -32,7 +32,6 @@
 
 - name: copy of requirements.txt
   template: src=django-th-dummy/requirements.txt dest=django-th-{{ module_name }}/requirements.txt
-  when: external_api
 
 - name: copy of my_dummy.py to my_{{ module_name }}.py
   template: src=django-th-dummy/th_dummy/my_dummy.py dest=django-th-{{ module_name }}/th_{{ module_name }}/my_{{ module_name }}.py
@@ -44,10 +43,10 @@
   template: src=django-th-dummy/th_dummy/forms.py dest=django-th-{{ module_name }}/th_{{ module_name }}/forms.py
 
 - name: copy of test.py
-  template: src=django-th-dummy/th_dummy/tests/test.py dest=django-th-{{ module_name }}/th_{{ module_name }}/tests/test.py
+  template: src=django-th-dummy/th_dummy/tests.py dest=django-th-{{ module_name }}/th_{{ module_name }}/tests.py
 
 - name: copy of the templates
-  copy: src=roles/dummy/templates/django-th-dummy/th_dummy/templates/th_dummy/ dest=django-th-{{ module_name }}/th_{{ module_name }}/templates/th_{{ module_name }}/
+  copy: src=roles/dummy/templates/django-th-dummy/th_dummy/templates/th_dummy/ dest=django-th-{{ module_name }}/th_{{ module_name }}/templates/{{ module_name }}/
 
 - name: remove unecessary callback.html template
-  file: path=django-th-{{ module_name }}/th_{{ module_name }}/templates/th_{{ module_name }}/callback.html state=absent
+  file: path=django-th-{{ module_name }}/th_{{ module_name }}/templates/{{ module_name }}/callback.html state=absent

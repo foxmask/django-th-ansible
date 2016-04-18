@@ -63,7 +63,7 @@ class {{ class_name }}Test(TestCase):
         """
         d = self.create_{{ module_name }}()
         self.assertTrue(isinstance(d, {{ class_name }}))
-        self.assertEqual(d.show(), "My {{ class_name }} %s" % (d.name))
+        self.assertEqual(d.show(), "My {{ class_name }} %s" % d.name)
 
     """
         Form
