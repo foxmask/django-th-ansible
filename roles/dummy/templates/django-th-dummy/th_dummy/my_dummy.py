@@ -39,10 +39,10 @@ logger = getLogger('django_th.trigger_happy')
 cache = caches['th_{{ module_name }}']
 
 
-class Service{{ class_name }}(ServicesMgr):
+class Service{{ class_name | upper }}(ServicesMgr):
 {% if oauth_version %}
     def __init__(self, token=None):
-
+        super(Service{{ class_name | upper }}, self).__init__(token)
         self.AUTH_URL = '{{ AUTH_URL }}'
         self.ACC_TOKEN = '{{ ACC_TOKEN }}'
         self.REQ_TOKEN = '{{ REQ_TOKEN }}'
