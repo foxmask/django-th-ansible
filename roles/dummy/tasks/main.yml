@@ -1,7 +1,7 @@
 ---
 # file roles/dummy/tasks/main.yml
 - name: create folder of the module name
-  command: mkdir -p django-th-{{module_name}}/th_{{ module_name }}/templates/th_{{ module_name }}
+  command: mkdir -p django-th-{{module_name}}/th_{{ module_name }}/templates/{{ module_name }}
 
 - name: create tests folder of the module name
   command: mkdir django-th-{{module_name}}/th_{{ module_name }}/tests
