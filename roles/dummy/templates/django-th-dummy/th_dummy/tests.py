@@ -2,12 +2,12 @@
 from django.test import TestCase
 from django.conf import settings
 from django.contrib.auth.models import User
-from th_{{ module_name }}.models import {{ class_name }}
+from th_{{ module_name }}.models import {{ class_name | upper }}
 from django_th.models import TriggerService, UserService, ServicesActivated
 from th_{{ module_name }}.forms import {{ class_name }}ProviderForm, {{ class_name }}ConsumerForm
 
 
-class {{ class_name }}Test(TestCase):
+class {{ class_name | upper }}Test(TestCase):
 
     """
         {{ module_name }}Test Model

@@ -3,7 +3,7 @@ from django.db import models
 from django_th.models.services import Services
 
 
-class {{ class_name }}(Services):
+class {{ class_name | upper }}(Services):
 
     """
         {{ module_name }} model to be adapted for the new service

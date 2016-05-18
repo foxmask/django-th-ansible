@@ -8,7 +8,6 @@ from {{ external_api }} import {{ external_api_class }}
 # django classes
 {% if oauth_version %}
 from django.conf import settings
-from django.core.urlresolvers import reverse
 {% endif %}
 from django.utils.log import getLogger
 from django.core.cache import caches
@@ -29,7 +28,7 @@ from django_th.services.services import ServicesMgr
 {% endif %}
     TH_SERVICES = (
         ...
-        'th_{{ module_name }}.my_{{ module_name }}.Service{{ class_name }}',
+        'th_{{ module_name }}.my_{{ module_name }}.Service{{ class_name | upper }}',
         ...
     )
 """
@@ -108,7 +107,7 @@ class Service{{ class_name | upper }}(ServicesMgr):
         """
             let's auth the user to the Service
         """
-        request_token = super(Service{{ class_name }}, self).auth(request)
+        request_token = super(Service{{ class_name | upper }}, self).auth(request)
         callback_url = self.callback_url(request, 'readability')
 
         # URL to redirect user to, to authorize your app
@@ -125,5 +124,5 @@ class Service{{ class_name | upper }}(ServicesMgr):
         """
         kwargs = {'access_token': '', 'service': 'Service{{ class_name }}',
                   'return': '{{ module_name }}'}
-        return super(Service{{ class_name }}, self).callback(request, **kwargs)
+        return super(Service{{ class_name | upper }}, self).callback(request, **kwargs)
 {% endif %}
