@@ -28,7 +28,7 @@ from django_th.services.services import ServicesMgr
 {% endif %}
     TH_SERVICES = (
         ...
-        'th_{{ module_name }}.my_{{ module_name }}.Service{{ class_name | upper }}',
+        'th_{{ module_name }}.my_{{ module_name }}.Service{{ class_name }}',
         ...
     )
 """
@@ -38,19 +38,23 @@ logger = getLogger('django_th.trigger_happy')
 cache = caches['th_{{ module_name }}']
 
 
-class Service{{ class_name | upper }}(ServicesMgr):
+class Service{{ class_name }}(ServicesMgr):
+
 {% if oauth_version %}
     def __init__(self, token=None):
-        super(Service{{ class_name | upper }}, self).__init__(token)
+        super(Service{{ class_name }}, self).__init__(token)
         self.AUTH_URL = '{{ AUTH_URL }}'
         self.ACC_TOKEN = '{{ ACC_TOKEN }}'
         self.REQ_TOKEN = '{{ REQ_TOKEN }}'
         self.consumer_key = settings.TH_{{ module_name | upper }}['consumer_key']
         self.consumer_secret = settings.TH_{{ module_name | upper }}['consumer_secret']
+        self.token = token
+        self.service = 'Service{{ class_name }}'
+        self.oauth = '{{ oauth_version }}'
         if token:
-            self.{{ module_name }} = {{ external_api_class }}(self.consumer_key, token)
-{% endif %}
+            self.{{ module_name }} = {{ external_api_class }}(self.consumer_key, self.consumer_secret, token)
 
+{% endif %}
     def read_data(self, **kwargs):
         """
             get the data from the service
@@ -64,7 +68,7 @@ class Service{{ class_name | upper }}(ServicesMgr):
 
             :rtype: list
         """
-        trigger_id = kwargs['trigger_id']
+        trigger_id = kwargs.get('trigger_id')
         data = list()
         cache.set('th_{{ module_name }}_' + str(trigger_id), data)
 
@@ -81,48 +85,13 @@ class Service{{ class_name | upper }}(ServicesMgr):
         from th_{{ module_name }}.models import {{ class_name }}
 
         status = False
-        kwargs = {}
 
         title, content = super(Service{{ class_name }}, self).save_data(data, **kwargs)
 
-        if token and 'link' in data and data['link'] is not None and len(data['link']) > 0:
-            # get the data of this trigger
-            trigger = {{ class_name }}.objects.get(trigger_id=trigger_id)
-            # if the external service need we provide
-            # our stored token and token secret then I do
-            # token_key, token_secret = token.split('#TH#')
-            self.{{ module_name }}.add(url=data['link'], title=title, tags=(trigger.tag.lower()))
+        # get the data of this trigger
+        trigger = {{ class_name }}.objects.get(trigger_id=trigger_id)
+        # we suppose we use a tag property for this service 
+        status = self.{{ module_name }}.add(title=title, content=content, tags= trigger.tags)
 
-            sentence = str('{{ module_name }} {} created').format(data['link'])
-            logger.debug(sentence)
-            status = True
-        else:
-            logger.critical(
-                "no token or link provided for trigger ID {} ".format(trigger_id))
-            status = False
         return status
 
-{% if oauth_version %}
-    def auth(self, request):
-        """
-            let's auth the user to the Service
-        """
-        request_token = super(Service{{ class_name | upper }}, self).auth(request)
-        callback_url = self.callback_url(request, 'readability')
-
-        # URL to redirect user to, to authorize your app
-        auth_url_str = '%s?oauth_token=%s&oauth_callback=%s'
-        auth_url = auth_url_str % (self.AUTH_URL,
-                                   request_token['oauth_token'],
-                                   callback_url)
-
-        return auth_url
-
-    def callback(self, request):
-        """
-            Called from the Service when the user accept to activate it
-        """
-        kwargs = {'access_token': '', 'service': 'Service{{ class_name }}',
-                  'return': '{{ module_name }}'}
-        return super(Service{{ class_name | upper }}, self).callback(request, **kwargs)
-{% endif %}

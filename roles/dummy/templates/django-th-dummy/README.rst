@@ -9,7 +9,7 @@
 Requirements :
 ==============
 
-* django_th == 0.12.1
+* django_th == 1.0.0
 
 
 Installation:
@@ -72,9 +72,26 @@ TH_{{ module_name }} is the settings you will need to be able to add/read data i
 
     TH_{{ module_name | upper }} = {
         'consumer_key': 'abcdefghijklmnopqrstuvwxyz',
+        'consumer_secret': 'abcdefghijklmnopqrstuvwxyz',
     }
 
 {% endif %}
+
+
+
+Database
+~~~~~~~~
+
+Then finish the installation by :
+
+.. code:: bash
+
+   python manage.py migrate
+
+
+to create the table of your service
+
+
 Setting up : Administration
 ===========================
 

@@ -1,10 +1,11 @@
 ---
 # file roles/dummy/tasks/main.yml
+
+
+- debug: msg="Starting the creation of the 'Trigger Happy' module '{{ module_name }}' ..."
+
 - name: create folder of the module name
   command: mkdir -p django-th-{{module_name}}/th_{{ module_name }}/templates/{{ module_name }}
-
-- name: create tests folder of the module name
-  command: mkdir django-th-{{module_name}}/th_{{ module_name }}/tests
 
 - name: travis.yml
   template: src=django-th-dummy/.travis.yml dest=django-th-{{ module_name }}/.travis.yml
@@ -50,3 +51,8 @@
 
 - name: remove unecessary callback.html template
   file: path=django-th-{{ module_name }}/th_{{ module_name }}/templates/{{ module_name }}/callback.html state=absent
+  when: oauth_version == ''
+
+
+- debug: msg="Your new 'Trigger Happy' module '{{ module_name }}' is now ready !"
+

@@ -3,7 +3,7 @@ from django.db import models
 from django_th.models.services import Services
 
 
-class {{ class_name | upper }}(Services):
+class {{ class_name }}(Services):
 
     """
         {{ module_name }} model to be adapted for the new service
@@ -11,7 +11,6 @@ class {{ class_name | upper }}(Services):
     # put whatever you need  here
     # eg title = models.CharField(max_length=80)
     # but keep at least this one
-    title = models.CharField(max_length=80)
     trigger = models.ForeignKey('TriggerService')
 
     class Meta:

@@ -7,13 +7,13 @@ this project permits to create a new module for Trigger Happy from scratch
 Description
 ===========
 
-This project will create a complet directory tree with all the necessary stuff to be ready to finish to wirte thye main code of your module
+This project will create a complet directory tree with all the necessary stuff to be ready to finish to write the main code of your module
 
 
 Requirements
 ============
 
-* Ansible 1.9.x
+* Ansible 1.9 or 2, as you want, both will work
 * MarkupSafe
 
 
@@ -37,7 +37,6 @@ the content of the actual looks like this
       vars:
         # to directory tree and class/module/name purpose
         module_name: johndoe
-        service_name: johndoe
         class_name: Johndoe
 
         # for setup.py purpose
@@ -55,7 +54,7 @@ the content of the actual looks like this
 
         # for oauth if any
 
-        oauth_version: 1
+        oauth_version: ''   # can contain oauth2 or oauth1 or empty
 
         # URL to access to the OAuth of the service
         AUTH_URL: 'http://foobar.com/oauth/auth'
@@ -82,7 +81,6 @@ in case you want to create a module that does not use external_api nor oauth the
       vars:
         # to directory tree and class/module/name purpose
         module_name: johndoe
-        service_name: johndoe
         class_name: Johndoe
 
         # for setup.py purpose
@@ -100,7 +98,7 @@ in case you want to create a module that does not use external_api nor oauth the
 
         # for oauth if any
 
-        oauth_version:
+        oauth_version: ''
 
         # URL to access to the OAuth of the service
         AUTH_URL:
@@ -222,3 +220,20 @@ last step
 =========
 
 change the string "Dummy" in all the templates
+
+
+.. code:: bash
+   
+   sed -i -e 's/Dummy/JohnDoe/' django-th-johndoe/th_johndoe/templates/th_johndoe/callback.html
+   sed -i -e 's/Dummy/JohnDoe/' django-th-johndoe/th_johndoe/templates/th_johndoe/wz-1-form.html
+   sed -i -e 's/Dummy/JohnDoe/' django-th-johndoe/th_johndoe/templates/th_johndoe/wz-3-form.html
+
+Finally
+=======
+
+Once it is done "django-th-johndoe" is ready to be pushed on a repository of your own.
+
+But if you plan to make a pull request to TriggerHappy project, you will just need to keep the directory "th_johndoe" 
+
+
+.. _TriggerHappy: https://github.com/foxmask/django-th/

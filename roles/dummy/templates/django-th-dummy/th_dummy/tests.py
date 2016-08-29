@@ -2,15 +2,15 @@
 from django.test import TestCase
 from django.conf import settings
 from django.contrib.auth.models import User
-from th_{{ module_name }}.models import {{ class_name | upper }}
+from th_{{ module_name }}.models import {{ class_name }}
 from django_th.models import TriggerService, UserService, ServicesActivated
-from th_{{ module_name }}.forms import {{ class_name | upper }}ProviderForm, {{ class_name | upper }}ConsumerForm
+from th_{{ module_name }}.forms import {{ class_name }}ProviderForm, {{ class_name }}ConsumerForm
 
 
-class {{ class_name | upper }}Test(TestCase):
+class {{ class_name }}Test(TestCase):
 
     """
-        {{ module_name | upper }}Test Model
+        {{ module_name }}Test Model
     """
     def setUp(self):
         """
@@ -55,14 +55,14 @@ class {{ class_name | upper }}Test(TestCase):
         trigger = self.create_triggerservice()
         name = '{{ module_name }}'
         status = True
-        return {{ class_name | upper }}.objects.create(trigger=trigger, name=name, status=status)
+        return {{ class_name }}.objects.create(trigger=trigger, name=name, status=status)
 
     def test_{{ module_name }}(self):
         """
            Test if the creation of the {{ module_name }} object looks fine
         """
         d = self.create_{{ module_name }}()
-        self.assertTrue(isinstance(d, {{ class_name | upper }}))
+        self.assertTrue(isinstance(d, {{ class_name }}))
         self.assertEqual(d.show(), "My {{ class_name }} %s" % d.name)
 
     """
@@ -75,14 +75,14 @@ class {{ class_name | upper }}Test(TestCase):
         """
         d = self.create_{{ module_name }}()
         data = {'name': d.name}
-        form = {{ class_name | upper }}ProviderForm(data=data)
+        form = {{ class_name }}ProviderForm(data=data)
         self.assertTrue(form.is_valid())
 
     def test_invalid_provider_form(self):
         """
            test if that form is not a valid provider one
         """
-        form = {{ class_name | upper }}ProviderForm(data={})
+        form = {{ class_name }}ProviderForm(data={})
         self.assertFalse(form.is_valid())
 
     # consumer
@@ -92,14 +92,14 @@ class {{ class_name | upper }}Test(TestCase):
         """
         d = self.create_{{ module_name }}()
         data = {'name': d.name}
-        form = {{ class_name | upper }}ConsumerForm(data=data)
+        form = {{ class_name }}ConsumerForm(data=data)
         self.assertTrue(form.is_valid())
 
     def test_invalid_consumer_form(self):
         """
            test if that form is not a valid consumer one
         """
-        form = {{ class_name | upper }}ConsumerForm(data={})
+        form = {{ class_name }}ConsumerForm(data={})
         self.assertFalse(form.is_valid())
 
 {% if external_api %}
@@ -107,6 +107,6 @@ class {{ class_name | upper }}Test(TestCase):
         """
             does this settings exists ?
         """
-        self.assertTrue(settings.TH_{{ module_name | upper }})
+        self.assertTrue(settings.TH_{{ module_name }})
 
 {% endif %}
