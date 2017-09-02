@@ -87,7 +87,7 @@ class Service{{ class_name }}(ServicesMgr):
 
         status = False
 
-        title, content = super(Service{{ class_name }}, self).save_data(data, **kwargs)
+        title, content = super(Service{{ class_name }}, self).save_data(data, **data)
 
         # get the data of this trigger
         trigger = {{ class_name }}.objects.get(trigger_id=trigger_id)
