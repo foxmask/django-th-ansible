@@ -107,6 +107,6 @@ class {{ class_name }}Test(TestCase):
         """
             does this settings exists ?
         """
-        self.assertTrue(settings.TH_{{ module_name }})
+        self.assertTrue(settings.TH_{{ module_name | upper }})
 
 {% endif %}
