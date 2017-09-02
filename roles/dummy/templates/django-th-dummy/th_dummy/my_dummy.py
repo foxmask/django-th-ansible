@@ -9,8 +9,9 @@ from {{ external_api }} import {{ external_api_class }}
 {% if oauth_version %}
 from django.conf import settings
 {% endif %}
-from django.utils.log import getLogger
 from django.core.cache import caches
+
+from logging import getLogger
 
 # django_th classes
 from django_th.services.services import ServicesMgr
@@ -90,7 +91,7 @@ class Service{{ class_name }}(ServicesMgr):
 
         # get the data of this trigger
         trigger = {{ class_name }}.objects.get(trigger_id=trigger_id)
-        # we suppose we use a tag property for this service 
+        # we suppose we use a tag property for this service
         status = self.{{ module_name }}.add(title=title, content=content, tags= trigger.tags)
 
         return status
