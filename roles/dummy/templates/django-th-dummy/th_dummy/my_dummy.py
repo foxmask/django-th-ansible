@@ -20,7 +20,7 @@ from django_th.services.services import ServicesMgr
 """
 {% if oauth_version %}
     handle process with {{ module_name }}
-    put the following in settings.py
+    put the following in th_settings.py
 
     TH_{{ module_name | upper }} = {
         'consumer_key': 'abcdefghijklmnopqrstuvwxyz',
