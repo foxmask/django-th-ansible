@@ -5,52 +5,31 @@
 - debug: msg="Starting the creation of the 'Trigger Happy' module '{{ module_name }}' ..."
 
 - name: create folder of the module name
-  command: mkdir -p django-th-{{module_name}}/th_{{ module_name }}/templates/{{ module_name }}
-
-- name: travis.yml
-  template: src=django-th-dummy/.travis.yml dest=django-th-{{ module_name }}/.travis.yml
-
-- name: gitignore
-  template: src=django-th-dummy/.gitignore dest=django-th-{{ module_name }}/.gitignore
+  command: mkdir -p th_{{ module_name }}/templates/{{ module_name }}
 
 - name: copy of th_dummy/__init__.py
-  template: src=django-th-dummy/th_dummy/__init__.py dest=django-th-{{ module_name }}/th_{{ module_name }}/__init__.py
+  template: src=django-th-dummy/th_dummy/__init__.py dest=th_{{ module_name }}/__init__.py
 
 - name: copy of th_dummy/tests.py
-  template: src=django-th-dummy/th_dummy/tests.py dest=django-th-{{ module_name }}/th_{{ module_name }}/tests.py
-
-- name: copy of LICENSE
-  template: src=django-th-dummy/LICENSE dest=django-th-{{ module_name }}/LICENSE
-
-- name: copy of MANIFEST.in
-  template: src=django-th-dummy/MANIFEST.in dest=django-th-{{ module_name }}/MANIFEST.in
-
-- name: copy of setup.py
-  template: src=django-th-dummy/setup.py dest=django-th-{{ module_name }}/setup.py
-
-- name: copy of README.rst
-  template: src=django-th-dummy/README.rst dest=django-th-{{ module_name }}/README.rst
-
-- name: copy of requirements.txt
-  template: src=django-th-dummy/requirements.txt dest=django-th-{{ module_name }}/requirements.txt
+  template: src=django-th-dummy/th_dummy/tests.py dest=th_{{ module_name }}/tests.py
 
 - name: copy of my_dummy.py to my_{{ module_name }}.py
-  template: src=django-th-dummy/th_dummy/my_dummy.py dest=django-th-{{ module_name }}/th_{{ module_name }}/my_{{ module_name }}.py
+  template: src=django-th-dummy/th_dummy/my_dummy.py dest=th_{{ module_name }}/my_{{ module_name }}.py
 
 - name: copy of model.py
-  template: src=django-th-dummy/th_dummy/models.py dest=django-th-{{ module_name }}/th_{{ module_name }}/models.py
+  template: src=django-th-dummy/th_dummy/models.py dest=th_{{ module_name }}/models.py
 
 - name: copy of forms.py
-  template: src=django-th-dummy/th_dummy/forms.py dest=django-th-{{ module_name }}/th_{{ module_name }}/forms.py
+  template: src=django-th-dummy/th_dummy/forms.py dest=th_{{ module_name }}/forms.py
 
 - name: copy of test.py
-  template: src=django-th-dummy/th_dummy/tests.py dest=django-th-{{ module_name }}/th_{{ module_name }}/tests.py
+  template: src=django-th-dummy/th_dummy/tests.py dest=th_{{ module_name }}/tests.py
 
 - name: copy of the templates
-  copy: src=roles/dummy/templates/django-th-dummy/th_dummy/templates/th_dummy/ dest=django-th-{{ module_name }}/th_{{ module_name }}/templates/{{ module_name }}/
+  copy: src=roles/dummy/templates/django-th-dummy/th_dummy/templates/th_dummy/ dest=th_{{ module_name }}/templates/{{ module_name }}/
 
 - name: remove unecessary callback.html template
-  file: path=django-th-{{ module_name }}/th_{{ module_name }}/templates/{{ module_name }}/callback.html state=absent
+  file: path=th_{{ module_name }}/templates/{{ module_name }}/callback.html state=absent
   when: oauth_version == ''
 
 

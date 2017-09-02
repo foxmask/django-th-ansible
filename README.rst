@@ -13,8 +13,7 @@ This project will create a complet directory tree with all the necessary stuff t
 Requirements
 ============
 
-* Ansible 1.9 or 2, as you want, both will work
-* MarkupSafe
+* Ansible
 
 
 site.yml
@@ -92,7 +91,7 @@ in case you want to create a module that does not use external_api nor oauth the
         download_url: https://github.com/foxmask/django-th-johndoe/archive/trigger-happy-johndoe-
 
         # for dependencies purpose in the requirements.txt file
-        external_api: 
+        external_api:
         external_api_class:
         external_api_version:
 
@@ -123,74 +122,54 @@ and see
 
 .. code:: bash
 
-    PLAY [home-sweet-home] ********************************************************
+    PLAY [home-sweet-home] ***********************************************************************************************************************************************************************************************************************
 
-    GATHERING FACTS ***************************************************************
+    TASK [Gathering Facts] ***********************************************************************************************************************************************************************************************************************
     ok: [localhost]
 
-    TASK: [dummy | create folder of the module name] ******************************
+    TASK [dummy : debug] *************************************************************************************************************************************************************************************************************************
+    ok: [localhost] => {
+        "msg": "Starting the creation of the 'Trigger Happy' module 'johndoe' ..."
+    }
+
+    TASK [dummy : create folder of the module name] **********************************************************************************************************************************************************************************************
+     [WARNING]: Consider using file module with state=directory rather than running mkdir
+
     changed: [localhost]
 
-    TASK: [dummy | create tests folder of the module name] ************************
+    TASK [dummy : copy of th_dummy/__init__.py] **************************************************************************************************************************************************************************************************
     changed: [localhost]
 
-    TASK: [dummy | travis.yml] ****************************************************
+    TASK [dummy : copy of th_dummy/tests.py] *****************************************************************************************************************************************************************************************************
     changed: [localhost]
 
-    TASK: [dummy | gitignore] *****************************************************
+    TASK [dummy : copy of my_dummy.py to my_johndoe.py] *******************************************************************************************************************************************************************************************
     changed: [localhost]
 
-    TASK: [dummy | copy of th_dummy/__init__.py] **********************************
+    TASK [dummy : copy of model.py] **************************************************************************************************************************************************************************************************************
     changed: [localhost]
 
-    TASK: [dummy | copy of th_dummy/tests/__init__.py] ****************************
+    TASK [dummy : copy of forms.py] **************************************************************************************************************************************************************************************************************
     changed: [localhost]
 
-    TASK: [dummy | copy of LICENSE] ***********************************************
+    TASK [dummy : copy of test.py] ***************************************************************************************************************************************************************************************************************
+    ok: [localhost]
+
+    TASK [dummy : copy of the templates] *********************************************************************************************************************************************************************************************************
     changed: [localhost]
 
-    TASK: [dummy | copy of MANIFEST.in] *******************************************
-    changed: [localhost]
+    TASK [dummy : remove unecessary callback.html template] **************************************************************************************************************************************************************************************
+    skipping: [localhost]
 
-    TASK: [dummy | copy of setup.py] **********************************************
-    changed: [localhost]
+    TASK [dummy : debug] *************************************************************************************************************************************************************************************************************************
+    ok: [localhost] => {
+        "msg": "Your new 'Trigger Happy' module 'johndoe' is now ready !"
+    }
 
-    TASK: [dummy | copy of README.rst] ********************************************
-    changed: [localhost]
+    PLAY RECAP ***********************************************************************************************************************************************************************************************************************************
+    localhost                  : ok=11   changed=7    unreachable=0    failed=0
 
-    TASK: [dummy | copy of requirements.txt] **************************************
-    changed: [localhost]
-
-    TASK: [dummy | copy of my_dummy.py to my_{{ module_name }}.py] ***************
-    changed: [localhost]
-
-    TASK: [dummy | copy of model.py] **********************************************
-    changed: [localhost]
-
-    TASK: [dummy | copy of forms.py] **********************************************
-    changed: [localhost]
-
-    TASK: [dummy | copy of test.py] ***********************************************
-    changed: [localhost]
-
-    TASK: [dummy | copy of the templates] *****************************************
-    changed: [localhost]
-
-    PLAY RECAP ********************************************************************
-    localhost                  : ok=17   changed=16   unreachable=0    failed=0
-
-    (triggerhappy-bootstrap)foxmask@zorro:~/Django-VirtualEnv/django-th-ansible$ ls -ltR django-th-johndoe/
-    django-th-johndoe/:
-    total 24
-    drwxr-xr-x 4 foxmask foxmask 4096 août  23 16:28 th_johndoe
-    -rw-r--r-- 1 foxmask foxmask   14 août  23 16:28 requirements.txt
-    -rw-r--r-- 1 foxmask foxmask 1368 août  23 16:28 README.rst
-    -rw-r--r-- 1 foxmask foxmask 1186 août  23 16:28 setup.py
-    -rw-r--r-- 1 foxmask foxmask  194 août  23 16:28 MANIFEST.in
-    -rw-r--r-- 1 foxmask foxmask 1484 août  23 16:28 LICENSE
-
-    django-th-johndoe/th_johndoe:
-    total 28
+    (triggerhappy-bootstrap)foxmask@zorro:~/Django-VirtualEnv/django-th-ansible$ ls -ltR th_johndoe/:
     drwxr-xr-x 2 foxmask foxmask 4096 août  23 16:28 tests
     -rw-r--r-- 1 foxmask foxmask  471 août  23 16:28 forms.py
     -rw-r--r-- 1 foxmask foxmask  614 août  23 16:28 models.py
@@ -198,16 +177,16 @@ and see
     -rw-r--r-- 1 foxmask foxmask   81 août  23 16:28 __init__.py
     drwxr-xr-x 3 foxmask foxmask 4096 août  23 16:28 templates
 
-    django-th-johndoe/th_johndoe/tests:
+    th_johndoe/tests:
     total 4
     -rw-r--r-- 1 foxmask foxmask 3725 août  23 16:28 test.py
     -rw-r--r-- 1 foxmask foxmask    0 août  23 16:28 __init__.py
 
-    django-th-johndoe/th_johndoe/templates:
+    th_johndoe/templates:
     total 4
     drwxr-xr-x 2 foxmask foxmask 4096 août  23 16:28 th_johndoe
 
-    django-th-johndoe/th_johndoe/templates/th_johndoe:
+    th_johndoe/templates/th_johndoe:
     total 20
     -rw-r--r-- 1 foxmask foxmask 1277 août  23 16:28 edit_provider.html
     -rw-r--r-- 1 foxmask foxmask 1277 août  23 16:28 edit_consumer.html
@@ -223,17 +202,17 @@ change the string "Dummy" in all the templates
 
 
 .. code:: bash
-   
-   sed -i -e 's/Dummy/JohnDoe/' django-th-johndoe/th_johndoe/templates/th_johndoe/callback.html
-   sed -i -e 's/Dummy/JohnDoe/' django-th-johndoe/th_johndoe/templates/th_johndoe/wz-1-form.html
-   sed -i -e 's/Dummy/JohnDoe/' django-th-johndoe/th_johndoe/templates/th_johndoe/wz-3-form.html
+
+   sed -i -e 's/Dummy/JohnDoe/' th_johndoe/th_johndoe/templates/th_johndoe/callback.html
+   sed -i -e 's/Dummy/JohnDoe/' th_johndoe/th_johndoe/templates/th_johndoe/wz-1-form.html
+   sed -i -e 's/Dummy/JohnDoe/' th_johndoe/th_johndoe/templates/th_johndoe/wz-3-form.html
 
 Finally
 =======
 
-Once it is done "django-th-johndoe" is ready to be pushed on a repository of your own.
+Once it is done "th_johndoe" is ready to be pushed on a repository of your own.
 
-But if you plan to make a pull request to TriggerHappy project, you will just need to keep the directory "th_johndoe" 
+But if you plan to make a pull request to TriggerHappy project, you will just need to keep the directory "th_johndoe"
 
 
 .. _TriggerHappy: https://github.com/foxmask/django-th/

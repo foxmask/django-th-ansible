@@ -1,6 +1,0 @@
-exclude th_{{ module_name }}/local_settings.py
-include *.txt *.rst
-recursive-include th_{{ module_name }} *.html
-recursive-include th_{{ module_name }}/templates *
-recursive-exclude * __pycache__
-recursive-exclude * *.py[co]
