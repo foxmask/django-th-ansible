@@ -22,7 +22,7 @@ from django_th.services.services import ServicesMgr
     handle process with {{ module_name }}
     put the following in th_settings.py
 
-    TH_{{ module_name | upper }} = {
+    TH_{{ module_name | upper }}_KEY = {
         'consumer_key': 'abcdefghijklmnopqrstuvwxyz',
         'consumer_secret': 'abcdefghijklmnopqrstuvwxyz',
     }
@@ -36,7 +36,7 @@ from django_th.services.services import ServicesMgr
 
 logger = getLogger('django_th.trigger_happy')
 
-cache = caches['th_{{ module_name }}']
+cache = caches['django_th']
 
 
 class Service{{ class_name }}(ServicesMgr):

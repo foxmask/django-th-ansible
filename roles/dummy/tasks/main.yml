@@ -16,13 +16,13 @@
 - name: copy of my_dummy.py to my_{{ module_name }}.py
   template: src=django-th-dummy/th_dummy/my_dummy.py dest=th_{{ module_name }}/my_{{ module_name }}.py
 
-- name: copy of model.py
+- name: copy of models.py
   template: src=django-th-dummy/th_dummy/models.py dest=th_{{ module_name }}/models.py
 
 - name: copy of forms.py
   template: src=django-th-dummy/th_dummy/forms.py dest=th_{{ module_name }}/forms.py
 
-- name: copy of test.py
+- name: copy of tests.py
   template: src=django-th-dummy/th_dummy/tests.py dest=th_{{ module_name }}/tests.py
 
 - name: copy of the templates

@@ -14,7 +14,7 @@ class {{ class_name }}(Services):
     trigger = models.ForeignKey('TriggerService')
 
     class Meta:
-        app_label = 'django_th'
+        app_label = 'th_{{ module_name }}'
         db_table = 'django_th_{{ module_name }}'
 
     def __str__(self):
