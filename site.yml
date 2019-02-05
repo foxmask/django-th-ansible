@@ -10,21 +10,21 @@
 
   vars:
     # to directory tree and class/module/name purpose
-    module_name: johndoe    # will become th_johndoe
-    class_name: Johndoe    # will become ServiceJohndoe
+    module_name: joplin # will become th_johndoe
+    class_name: Joplin # will become ServiceJohndoe
 
     # for setup.py purpose
-    author: John Doe
-    author_email: john@doe.com
-    description: this is a fun module
-    details: when happiness is met
-    url: https://github.com/foxmask/django-th-johndoe   # change it to the repository of your own
-    download_url: https://github.com/foxmask/django-th-johndoe/archive/trigger-happy-johndoe-
+    author: foxmask
+    author_email: foxmask protonmail
+    description: Joplin Editor
+    details: Joplin Markdown Editor
+    url: https://github.com/push-things/django-th-joplin   # change it to the repository of your own
+    download_url: https://github.com/push-things/django-th-joplin/archive/trigger-happy-joplin-
 
     # for dependencies purpose
-    external_api: foobar
-    external_api_class: Foobar
-    external_api_version: 1.2.3
+    external_api: joplin_api
+    external_api_class: JoplinApi
+    external_api_version: 1.2.2
 
     # for oauth if any
     oauth_version: ''   # oauth1 or oauth2 or leave empty if this module does not handle Oauth process at all

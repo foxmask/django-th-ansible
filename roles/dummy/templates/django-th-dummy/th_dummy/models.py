@@ -1,6 +1,7 @@
 # coding: utf-8
 from django.db import models
 from django_th.models.services import Services
+from django_th.models import TriggerService
 
 
 class {{ class_name }}(Services):
@@ -11,7 +12,7 @@ class {{ class_name }}(Services):
     # put whatever you need  here
     # eg title = models.CharField(max_length=80)
     # but keep at least this one
-    trigger = models.ForeignKey('TriggerService')
+    trigger = models.ForeignKey(TriggerService)
 
     class Meta:
         app_label = 'th_{{ module_name }}'

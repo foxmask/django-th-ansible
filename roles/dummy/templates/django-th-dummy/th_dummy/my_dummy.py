@@ -41,21 +41,23 @@ cache = caches['django_th']
 
 class Service{{ class_name }}(ServicesMgr):
 
-{% if oauth_version %}
-    def __init__(self, token=None):
+
+    def __init__(self, token=None, **kwargs):
         super(Service{{ class_name }}, self).__init__(token)
+        {% if oauth_version %}
         self.AUTH_URL = '{{ AUTH_URL }}'
         self.ACC_TOKEN = '{{ ACC_TOKEN }}'
         self.REQ_TOKEN = '{{ REQ_TOKEN }}'
         self.consumer_key = settings.TH_{{ module_name | upper }}['consumer_key']
         self.consumer_secret = settings.TH_{{ module_name | upper }}['consumer_secret']
+        self.oauth = '{{ oauth_version }}'
+        {% endif %}
         self.token = token
         self.service = 'Service{{ class_name }}'
-        self.oauth = '{{ oauth_version }}'
         if token:
             self.{{ module_name }} = {{ external_api_class }}(self.consumer_key, self.consumer_secret, token)
 
-{% endif %}
+
     def read_data(self, **kwargs):
         """
             get the data from the service
